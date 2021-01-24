@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Todo from './Todo';
 import './App.css';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
@@ -6,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 
 function App() {
-  const [todos, setTodas] = useState(['1', '2', '3', '4']);
+  const [todos, setTodas] = useState([]);
   const [input, setInput] = useState('');
 
   const addTodo = (event) => {
@@ -40,8 +41,10 @@ function App() {
       </form>
 
       <ul>
-        {todos.map(todo => (
-          <li>{todo}</li>
+        {todos.map((todo,i) => (
+         <Todo
+          key={i} 
+          text={todo}/>
         ))}
 
       </ul>
