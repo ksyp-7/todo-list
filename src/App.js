@@ -2,12 +2,22 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [todos ,setTodas] = useState(['1','2','3','4']);
+  const [todos, setTodas] = useState(['1', '2', '3', '4']);
+  const [input, setInput] = useState('');
+
+  const addTodo = (event) => {
+    event.preventDefault()
+    setTodas([...todos, input]);
+    setInput('');
+  }
   return (
     <div className="App">
       <h1>Let's get started</h1>
-      <input />
-      <button>Todo</button>
+      <form>
+        <input value={input} onChange={event => setInput(event.target.value)} />
+        <button type="submit" onClick={addTodo}>Todo</button>
+
+      </form>
 
       <ul>
         {todos.map(todo => (
