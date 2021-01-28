@@ -13,50 +13,50 @@ function App() {
   const [todos, setTodas] = useState([]);
   const [input, setInput] = useState('');
   useEffect(() => {
-    db.collection('todos').orderBy('timestap','desc').onSnapshot(snapshot =>{
-      setTodas(snapshot.docs.map(doc => doc.data().todos))
+    db.collection('todos').orderBy('timestap', 'desc').onSnapshot(snapshot => {
+      setTodas(snapshot.docs.map(doc => ({ id: doc.id, todo: doc.data().todos })))
     })
-    
+
   }, []);
-   const addTodo = (event) => {
+  const addTodo = (event) => {
     event.preventDefault()
     db.collection('todos').add({
       todos: input,
       timestap: firebase.firestore.FieldValue.serverTimestamp()
-      
+
     })
     setInput('');
   };
 
- return (
+  return (
     <div className="App">
       <h1>Let's get started</h1>
       <form>
         <FormControl>
-          <InputLabel>Enter Todo</InputLabel>
+          <InputLabel>Enter Todo ✏</InputLabel>
           <Input
-             value={input} 
-             onChange={event => setInput(event.target.value)} 
-             id="my-input" 
-             aria-describedby="my-helper-text" />
+            value={input}
+            onChange={event => setInput(event.target.value)}
+            id="my-input"
+            aria-describedby="my-helper-text" />
 
         </FormControl>
         <Button
-           variant="contained"
-           color="primary"
-           type="submit"
-            onClick={addTodo}
-            disabled={!input}>
-              ADD Todo
+          variant="contained"
+          color="primary"
+          type="submit"
+          onClick={addTodo}
+          disabled={!input}>
+          ADD Todo
               </Button>
 
       </form>
 
       <ul>
-        {todos.map((todo,i) => (
-         <Todo
-          key={i} 
-          text={todo}/>
+        {todos.map((todo, i) => (
+          <Todo
+            key={i}
+            todo={todo} />
         ))}
 
       </ul>
