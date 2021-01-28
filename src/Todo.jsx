@@ -3,11 +3,11 @@ import React from 'react'
 
 function Todo(props) {
 	return (
-	<List>
+	<List className="todo_list">
 	<ListItem>
 	<ListItemAvatar>
 	</ListItemAvatar>
-	<ListItemText primary="Todo" secondary={props.text} />
+	<ListItemText primary={props.text} secondary="Dummy Dead-Line" />
 	</ListItem>
 	</List>
 	)
